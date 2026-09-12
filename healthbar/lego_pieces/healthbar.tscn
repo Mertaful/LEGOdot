@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dnbcx85cea3id"]
+
+[ext_resource type="Script" uid="uid://b278klsjpti1r" path="res://lego_pieces/healthbar.gd" id="1_rr31o"]
+
+[node name="root" type="Control" unique_id=521712375]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_rr31o")
+
+[node name="back" type="TextureProgressBar" parent="." unique_id=544233293]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="front" type="TextureProgressBar" parent="." unique_id=1164780182]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
