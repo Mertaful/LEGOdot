@@ -2,19 +2,44 @@
 
 [ext_resource type="Script" uid="uid://b278klsjpti1r" path="res://lego_pieces/healthbar.gd" id="1_rr31o"]
 
-[node name="root" type="Control" unique_id=521712375]
+[node name="Healthbar" type="Control" unique_id=521712375]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_rr31o")
 
-[node name="back" type="TextureProgressBar" parent="." unique_id=544233293]
-layout_mode = 0
+[node name="pivot" type="Control" parent="." unique_id=1384399916]
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="front" type="TextureProgressBar" parent="." unique_id=1164780182]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="back" type="TextureProgressBar" parent="pivot" unique_id=544233293]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+
+[node name="front" type="TextureProgressBar" parent="pivot" unique_id=1164780182]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 35.0
