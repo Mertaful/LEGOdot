@@ -8,6 +8,9 @@ extends Control
 @onready var _front: TextureProgressBar = $pivot/front
 @onready var _pivot: Control = $pivot
 
+signal on_damaged(bar_position: Vector2)
+signal on_healed(bar_position: Vector2)
+
 var health := max_health
 
 var _bar_tween : Tween = null
@@ -27,23 +30,38 @@ func _ready() -> void:
 		_back.texture_progress = bar_resource.progress
 		_front.texture_progress = bar_resource.fill
 
+func set_value(new_value : float, instant : bool = false) -> void:
+	if instant:
+		if _bar_tween:
+			_bar_tween.kill()
+		_back.value = new_value
+		_front.value = new_value
+	else:
+		apply_change(new_value - health)
+
 func apply_change(change_in_health : float) -> void:
 	var target_health = clampf(health + change_in_health, 0.0, max_health)
-	
-	if _bar_tween:
-			_bar_tween.kill()
+	var bar_emission_position = _front.global_position + Vector2(_front.texture_progress.get_width() * health / max_health, _front.texture_progress.get_height() * 0.5)
 	
 	if change_in_health < 0.0 and health > 0.0:
 		_front.value = target_health
+		
+		if _bar_tween:
+			_bar_tween.kill()
 		_bar_tween = create_tween()
 		_bar_tween.tween_property(_back, "value", target_health, 0.33)
 		_flash(bar_resource.damage_color)
 		_shake()
+		on_damaged.emit(bar_emission_position)
 	elif change_in_health > 0.0 and health < max_health:
 		_back.value = target_health
+		
+		if _bar_tween:
+			_bar_tween.kill()
 		_bar_tween = create_tween()
 		_bar_tween.tween_property(_front, "value", target_health, 0.2)
 		_flash(bar_resource.heal_color)
+		on_healed.emit(bar_emission_position)
 	
 	health = target_health
 

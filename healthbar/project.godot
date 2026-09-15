@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Healthbar"
+config/tags=PackedStringArray("healthbar", "lego", "prototyping", "ui")
 run/main_scene="uid://7cnh18l38bwl"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="uid://bm2kgfuxyqyc7"
+config/icon="uid://dxvmbl4fx4rbq"
 
 [display]
 
