@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://ds16m0285mspt"]
+
+[ext_resource type="Script" uid="uid://dcu4kiobrebse" path="res://lego_pieces/menu_persona/persona_button.gd" id="1_fbnlg"]
+[ext_resource type="Theme" uid="uid://cyccarnmges7i" path="res://lego_pieces/menu_persona/persona_text_theme.tres" id="1_rtr0y"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x15ge"]
+blend_mode = 1
+
+[node name="PersonaButton" type="Button" unique_id=1781548880]
+material = SubResource("CanvasItemMaterial_x15ge")
+offset_right = 634.0
+offset_bottom = 82.0
+offset_transform_enabled = true
+theme = ExtResource("1_rtr0y")
+text = "PLACEHOLDER"
+flat = true
+script = ExtResource("1_fbnlg")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

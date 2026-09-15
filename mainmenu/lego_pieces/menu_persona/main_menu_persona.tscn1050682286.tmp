@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://chn3w2wxvei53"]
+
+[ext_resource type="Script" uid="uid://8iv6knyykwep" path="res://lego_pieces/menu_persona/persona_menu.gd" id="1_2sve7"]
+[ext_resource type="FontFile" uid="uid://dr0ymkxhjqqxi" path="res://preview/Akira Expanded Demo.otf" id="2_3kmgy"]
+[ext_resource type="Script" uid="uid://4tvhbn1h1fa" path="res://lego_pieces/menu_persona/persona_menu_resource.gd" id="3_rd2kl"]
+[ext_resource type="Theme" uid="uid://cyccarnmges7i" path="res://lego_pieces/menu_persona/persona_text_theme.tres" id="4_rd2kl"]
+
+[sub_resource type="Resource" id="Resource_2sve7"]
+script = ExtResource("3_rd2kl")
+font = ExtResource("2_3kmgy")
+metadata/_custom_type_script = "uid://4tvhbn1h1fa"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rm57x"]
+blend_mode = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x15ge"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cajl5"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mdetr"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bh2mb"]
+blend_mode = 1
+
+[node name="MainMenu" type="Control" unique_id=1982407197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2sve7")
+_menu_resource = SubResource("Resource_2sve7")
+
+[node name="Background" type="ColorRect" parent="." unique_id=300641080]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.075, 0.35, 0.75, 1)
+
+[node name="MenuNameLabel" type="RichTextLabel" parent="Background" unique_id=1049824892]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_rm57x")
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 997.0
+offset_top = 673.0
+offset_right = 997.0
+offset_bottom = 673.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+theme = ExtResource("4_rd2kl")
+bbcode_enabled = true
+text = "[b][i]MAIN[/i][/b]"
+fit_content = true
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1905567064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 30
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=151585347]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=1780999895]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_rd2kl")
+
+[node name="StartButton" type="Button" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=947657303]
+material = SubResource("CanvasItemMaterial_x15ge")
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_rotation = 0.034906585
+theme = ExtResource("4_rd2kl")
+text = "START GAME"
+flat = true
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=926494650]
+material = SubResource("CanvasItemMaterial_cajl5")
+layout_mode = 2
+theme = ExtResource("4_rd2kl")
+text = "SETTINGS"
+flat = true
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=1461915396]
+material = SubResource("CanvasItemMaterial_mdetr")
+layout_mode = 2
+theme = ExtResource("4_rd2kl")
+text = "CREDITS"
+flat = true
+
+[node name="ExitButton" type="Button" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=461430966]
+material = SubResource("CanvasItemMaterial_bh2mb")
+layout_mode = 2
+theme = ExtResource("4_rd2kl")
+text = "QUIT"
+flat = true

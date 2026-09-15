@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://chn3w2wxvei53"]
+
+[ext_resource type="Script" uid="uid://8iv6knyykwep" path="res://lego_pieces/menu_persona/persona_menu.gd" id="1_2sve7"]
+[ext_resource type="FontFile" uid="uid://dr0ymkxhjqqxi" path="res://preview/Akira Expanded Demo.otf" id="2_3kmgy"]
+[ext_resource type="Script" uid="uid://4tvhbn1h1fa" path="res://lego_pieces/menu_persona/persona_menu_resource.gd" id="3_rd2kl"]
+[ext_resource type="Theme" uid="uid://cyccarnmges7i" path="res://lego_pieces/menu_persona/persona_text_theme.tres" id="4_rd2kl"]
+[ext_resource type="PackedScene" uid="uid://ds16m0285mspt" path="res://lego_pieces/menu_persona/persona_button_scene.tscn" id="5_8pgov"]
+[ext_resource type="Shader" uid="uid://j2ihywyflm50" path="res://preview/selection_polygon_shader.gdshader" id="5_c7e5a"]
+
+[sub_resource type="Resource" id="Resource_2sve7"]
+script = ExtResource("3_rd2kl")
+font = ExtResource("2_3kmgy")
+brightest_grey = Color(0.72464263, 0.7246426, 0.7246426, 1)
+darkest_grey = Color(0.45452422, 0.45452428, 0.45452416, 1)
+max_rotation_offset = 3.0
+metadata/_custom_type_script = "uid://4tvhbn1h1fa"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rm57x"]
+blend_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n1c5g"]
+shader = ExtResource("5_c7e5a")
+shader_parameter/amplitude = 0.39200001862
+shader_parameter/speed = 0.038000001805
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fhent"]
+shader = ExtResource("5_c7e5a")
+shader_parameter/amplitude = 0.34000001615
+shader_parameter/speed = 0.002000000095
+
+[node name="MainMenu" type="Control" unique_id=1982407197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2sve7")
+_menu_resource = SubResource("Resource_2sve7")
+
+[node name="Background" type="ColorRect" parent="." unique_id=300641080]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.075, 0.35, 0.75, 1)
+
+[node name="MenuNameLabel" type="RichTextLabel" parent="Background" unique_id=1049824892]
+unique_name_in_owner = true
+material = SubResource("CanvasItemMaterial_rm57x")
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 997.0
+offset_top = 673.0
+offset_right = 997.0
+offset_bottom = 673.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -1.5707964
+theme = ExtResource("4_rd2kl")
+bbcode_enabled = true
+text = "[b][i]MAIN[/i][/b]"
+fit_content = true
+
+[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=663821651]
+material = SubResource("ShaderMaterial_n1c5g")
+position = Vector2(-6.9999695, 150.00002)
+rotation = -0.11868239
+scale = Vector2(1, 0.5)
+color = Color(0.9685872, 5.679429e-06, 7.70092e-07, 1)
+polygon = PackedVector2Array(76.01419, 211.48846, 194, 426, 731, 388)
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D2" unique_id=147518970]
+material = SubResource("ShaderMaterial_fhent")
+position = Vector2(15.50527, 43.981155)
+polygon = PackedVector2Array(103.13373, 195.80023, 194, 426, 731, 388)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1905567064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 30
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=151585347]
+layout_mode = 2
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=1780999895]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_rd2kl")
+
+[node name="StartButton" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=1781548880 instance=ExtResource("5_8pgov")]
+layout_mode = 2
+text = "Start game"
+
+[node name="SettingsButton" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=1823963596 instance=ExtResource("5_8pgov")]
+layout_mode = 2
+text = "settings"
+
+[node name="CreditsButton" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=1099919953 instance=ExtResource("5_8pgov")]
+layout_mode = 2
+text = "credits"
+
+[node name="ExitButton" parent="MarginContainer/CenterContainer/ButtonsContainer" unique_id=912614613 instance=ExtResource("5_8pgov")]
+layout_mode = 2
+text = "quit"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]

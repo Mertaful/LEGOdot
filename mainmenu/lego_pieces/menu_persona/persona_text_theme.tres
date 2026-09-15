@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3 uid="uid://cyccarnmges7i"]
+
+[ext_resource type="FontFile" uid="uid://dr0ymkxhjqqxi" path="res://preview/Akira Expanded Demo.otf" id="1_cajl5"]
+
+[resource]
+Button/font_sizes/font_size = 70
+Button/fonts/font = ExtResource("1_cajl5")
+RichTextLabel/font_sizes/bold_italics_font_size = 200
+RichTextLabel/fonts/bold_font = ExtResource("1_cajl5")
+RichTextLabel/fonts/bold_italics_font = ExtResource("1_cajl5")
+RichTextLabel/fonts/italics_font = ExtResource("1_cajl5")
+RichTextLabel/fonts/normal_font = ExtResource("1_cajl5")
+VBoxContainer/constants/separation = -27
