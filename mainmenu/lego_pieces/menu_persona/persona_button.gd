@@ -7,6 +7,8 @@ var _normal_material : CanvasItemMaterial
 var default_color : Color
 var pop_tween : Tween = null
 
+signal on_button_with_polygon_hovered(button_position : Vector2, button_dimensions : Vector2, offset_rotation : float)
+
 
 func _init() -> void:
 	_normal_material = CanvasItemMaterial.new()
@@ -37,6 +39,7 @@ func go_normal() -> void:
 
 func _on_mouse_entered() -> void:
 	go_crazy()
+	on_button_with_polygon_hovered.emit(global_position, size, offset_transform_rotation)
 
 func _on_mouse_exited() -> void:
 	go_normal()

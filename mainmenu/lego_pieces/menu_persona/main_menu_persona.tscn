@@ -6,6 +6,8 @@
 [ext_resource type="Theme" uid="uid://cyccarnmges7i" path="res://lego_pieces/menu_persona/persona_text_theme.tres" id="4_rd2kl"]
 [ext_resource type="PackedScene" uid="uid://ds16m0285mspt" path="res://lego_pieces/menu_persona/persona_button_scene.tscn" id="5_8pgov"]
 [ext_resource type="Shader" uid="uid://j2ihywyflm50" path="res://preview/selection_polygon_shader.gdshader" id="5_c7e5a"]
+[ext_resource type="Texture2D" uid="uid://dyjx2oeyn3kjf" path="res://preview/ogge_the_white.png" id="7_n1c5g"]
+[ext_resource type="PackedScene" uid="uid://663npbjir377" path="res://preview/lol_leaf.tscn" id="8_fhent"]
 
 [sub_resource type="Resource" id="Resource_2sve7"]
 script = ExtResource("3_rd2kl")
@@ -14,6 +16,14 @@ brightest_grey = Color(0.72464263, 0.7246426, 0.7246426, 1)
 darkest_grey = Color(0.45452422, 0.45452428, 0.45452416, 1)
 max_rotation_offset = 3.0
 metadata/_custom_type_script = "uid://4tvhbn1h1fa"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k0akp"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_n1c5g"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x15ge"]
+gradient = SubResource("Gradient_n1c5g")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rm57x"]
 blend_mode = 2
@@ -48,7 +58,35 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.075, 0.35, 0.75, 1)
 
-[node name="MenuNameLabel" type="RichTextLabel" parent="Background" unique_id=1049824892]
+[node name="TextureRect" type="TextureRect" parent="Background" unique_id=1448789167]
+material = SubResource("CanvasItemMaterial_k0akp")
+layout_mode = 0
+offset_left = 834.0
+offset_top = -61.0
+offset_right = 962.0
+offset_bottom = 686.0
+texture = SubResource("GradientTexture2D_x15ge")
+
+[node name="TextureRect2" type="TextureRect" parent="Background" unique_id=1861371010]
+layout_mode = 0
+offset_left = 295.0
+offset_top = -57.0
+offset_right = 954.0
+offset_bottom = 730.0
+texture = ExtResource("7_n1c5g")
+expand_mode = 1
+flip_h = true
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=806043937]
+layout_mode = 0
+offset_left = 960.0
+offset_top = -15.0
+offset_right = 1163.0
+offset_bottom = 677.0
+
+[node name="CPUParticles2D" parent="Background" unique_id=24544722 instance=ExtResource("8_fhent")]
+
+[node name="MenuNameLabel" type="RichTextLabel" parent="." unique_id=1049824892]
 unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_rm57x")
 clip_contents = false
@@ -68,7 +106,8 @@ bbcode_enabled = true
 text = "[b][i]MAIN[/i][/b]"
 fit_content = true
 
-[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=663821651]
+[node name="BackPolygon" type="Polygon2D" parent="." unique_id=663821651]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_n1c5g")
 position = Vector2(-6.9999695, 150.00002)
 rotation = -0.11868239
@@ -76,9 +115,9 @@ scale = Vector2(1, 0.5)
 color = Color(0.9685872, 5.679429e-06, 7.70092e-07, 1)
 polygon = PackedVector2Array(76.01419, 211.48846, 194, 426, 731, 388)
 
-[node name="Polygon2D" type="Polygon2D" parent="Polygon2D2" unique_id=147518970]
+[node name="FrontPolygon" type="Polygon2D" parent="BackPolygon" unique_id=147518970]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_fhent")
-position = Vector2(15.50527, 43.981155)
 polygon = PackedVector2Array(103.13373, 195.80023, 194, 426, 731, 388)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1905567064]
@@ -119,3 +158,4 @@ layout_mode = 2
 text = "quit"
 
 [connection signal="pressed" from="MarginContainer/CenterContainer/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonsContainer/ExitButton" to="." method="_on_exit_button_pressed"]

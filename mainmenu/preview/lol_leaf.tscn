@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://663npbjir377"]
+
+[ext_resource type="Texture2D" uid="uid://d7cju0iytx4m" path="res://preview/whitleaf.png" id="1_kln2y"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ndsek"]
+blend_mode = 1
+light_mode = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=24544722]
+modulate = Color(0.92057616, 0.92057616, 0.92057616, 1)
+material = SubResource("CanvasItemMaterial_ndsek")
+position = Vector2(-79, -40)
+amount = 32
+texture = ExtResource("1_kln2y")
+lifetime = 25.01
+randomness = 0.14
+emission_shape = 3
+emission_rect_extents = Vector2(1, 800)
+spread = 13.13
+gravity = Vector2(0, 15)
+initial_velocity_min = 99.64
+initial_velocity_max = 204.6
+angular_velocity_min = 105.0
+angular_velocity_max = 105.0
+linear_accel_min = 2.09
+linear_accel_max = 2.09
