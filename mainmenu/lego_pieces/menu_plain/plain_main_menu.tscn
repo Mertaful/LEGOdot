@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cva4qqwk1eg1g"]
+
+[ext_resource type="Script" uid="uid://cxoj74t7klsel" path="res://lego_pieces/menu_plain/plain_main_menu.gd" id="1_4dfbv"]
+[ext_resource type="PackedScene" uid="uid://cjv1o4kkfd50g" path="res://preview/game_scene.tscn" id="2_cgjpr"]
+[ext_resource type="Theme" uid="uid://cerq7m6dk0m1r" path="res://lego_pieces/menu_plain/plain_theme.tres" id="2_j2rfp"]
+[ext_resource type="PackedScene" uid="uid://d0wc8lgutoidh" path="res://preview/credits_scene.tscn" id="3_0cavu"]
+[ext_resource type="FontFile" uid="uid://cekihffdax7kb" path="res://preview/papyrus.ttf" id="3_bxdtu"]
+
+[node name="PlainMainMenu" type="Control" unique_id=1206041896]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4dfbv")
+_game_scene = ExtResource("2_cgjpr")
+_credits_scene = ExtResource("3_0cavu")
+metadata/_custom_type_script = "uid://cxoj74t7klsel"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1523442243]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1621357467]
+propagate_maximum_size = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = -15.0
+offset_right = 85.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=1317663591]
+layout_mode = 2
+theme = ExtResource("2_j2rfp")
+theme_type_variation = &"Title"
+theme_override_fonts/normal_font = ExtResource("3_bxdtu")
+bbcode_enabled = true
+text = "[shake rate=20.0 level=5 connected=1]GAME TITLE[/shake]"
+fit_content = true
+autowrap_mode = 0
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1784236786]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="StartButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=1210848974]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j2rfp")
+theme_type_variation = &"MainMenuButtons"
+text = "START GAME"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=1121334973]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j2rfp")
+theme_type_variation = &"MainMenuButtons"
+text = "SETTINGS"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=886702745]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j2rfp")
+theme_type_variation = &"MainMenuButtons"
+text = "CREDITS"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=257295480]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_j2rfp")
+theme_type_variation = &"MainMenuButtons"
+text = "QUIT"

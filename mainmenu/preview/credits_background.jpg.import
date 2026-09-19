@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d7cju0iytx4m"
-path="res://.godot/imported/whitleaf.png-fd885cd104242c12a2d0274f376f8727.ctex"
+uid="uid://3iu7yb2danwk"
+path="res://.godot/imported/credits_background.jpg-e10441e9ddb86ae8cad495e248f203cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://preview/whitleaf.png"
-dest_files=["res://.godot/imported/whitleaf.png-fd885cd104242c12a2d0274f376f8727.ctex"]
+source_file="res://preview/credits_background.jpg"
+dest_files=["res://.godot/imported/credits_background.jpg-e10441e9ddb86ae8cad495e248f203cd.ctex"]
 
 [params]
 

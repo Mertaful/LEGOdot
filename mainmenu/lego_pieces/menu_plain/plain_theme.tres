@@ -1,0 +1,55 @@
+[gd_resource type="Theme" format=3 uid="uid://cerq7m6dk0m1r"]
+
+[ext_resource type="FontFile" uid="uid://dr0ymkxhjqqxi" path="res://preview/Akira Expanded Demo.otf" id="1_sjmrw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j2rfp"]
+content_margin_left = 10.0
+content_margin_top = 15.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(1, 0, 1, 1)
+draw_center = false
+border_width_left = 4
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxdtu"]
+content_margin_left = 10.0
+content_margin_top = 15.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(1, 0, 1, 1)
+draw_center = false
+border_width_left = 4
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjmrw"]
+content_margin_left = 10.0
+content_margin_top = 15.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_x7abr"]
+
+[resource]
+Button/colors/font_disabled_color = Color(0.34033877, 0.34033957, 0.34033898, 0.5019608)
+Button/fonts/font = ExtResource("1_sjmrw")
+MainMenuButtons/base_type = &"Button"
+MainMenuButtons/colors/font_color = Color(1, 1, 1, 1)
+MainMenuButtons/colors/font_hover_color = Color(1, 0.4257876, 0.35708547, 1)
+MainMenuButtons/colors/font_hover_pressed_color = Color(0.99215686, 0.8392157, 0, 1)
+MainMenuButtons/colors/font_pressed_color = Color(0, 0, 0, 1)
+MainMenuButtons/font_sizes/font_size = 23
+MainMenuButtons/styles/hover = SubResource("StyleBoxFlat_j2rfp")
+MainMenuButtons/styles/normal = SubResource("StyleBoxFlat_bxdtu")
+MainMenuButtons/styles/pressed = SubResource("StyleBoxFlat_sjmrw")
+RichTextLabel/font_sizes/normal_font_size = 32
+RichTextLabel/fonts/bold_font = SubResource("SystemFont_x7abr")
+RichTextLabel/fonts/normal_font = ExtResource("1_sjmrw")
+Title/base_type = &"RichTextLabel"
+Title/font_sizes/normal_font_size = 75
+Title/fonts/normal_font = ExtResource("1_sjmrw")

@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Main menu"
 config/tags=PackedStringArray("lego", "menu", "prototyping", "ui")
-run/main_scene="uid://ccq1ahnvgqbgc"
+run/main_scene="uid://chn3w2wxvei53"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://c2sm8q8p31ly8"
 

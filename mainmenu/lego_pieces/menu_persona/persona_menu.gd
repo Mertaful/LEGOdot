@@ -25,6 +25,7 @@ func _ready() -> void:
 	back_polygon.color = _menu_resource.accent_color
 	front_polygon.color = Color(1.0, 1.0, 1.0, 1.0)
 	_update_polygon(Vector2(-10000.0, -10000.0))
+	background.color = _menu_resource.main_color
 
 func _set_button_color(button : PersonaButton) -> void:
 	_rng.seed = hash(button.text) + 3
