@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cjv1o4kkfd50g" path="res://preview/game_scene.tscn" id="2_cgjpr"]
 [ext_resource type="Theme" uid="uid://cerq7m6dk0m1r" path="res://lego_pieces/menu_plain/plain_theme.tres" id="2_j2rfp"]
 [ext_resource type="PackedScene" uid="uid://d0wc8lgutoidh" path="res://preview/credits_scene.tscn" id="3_0cavu"]
+[ext_resource type="PackedScene" uid="uid://y22r0btrbo3u" path="res://lego_pieces/menu_plain/plain_settings_menu.tscn" id="3_5mxha"]
 [ext_resource type="FontFile" uid="uid://cekihffdax7kb" path="res://preview/papyrus.ttf" id="3_bxdtu"]
 
 [node name="PlainMainMenu" type="Control" unique_id=1206041896]
@@ -15,6 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_4dfbv")
 _game_scene = ExtResource("2_cgjpr")
+_settings_scene = ExtResource("3_5mxha")
 _credits_scene = ExtResource("3_0cavu")
 metadata/_custom_type_script = "uid://cxoj74t7klsel"
 
@@ -48,7 +50,7 @@ theme = ExtResource("2_j2rfp")
 theme_type_variation = &"Title"
 theme_override_fonts/normal_font = ExtResource("3_bxdtu")
 bbcode_enabled = true
-text = "[shake rate=20.0 level=5 connected=1]GAME TITLE[/shake]"
+text = "[shake rate=20.0 level=5 connected=1]AVATARD[/shake]"
 fit_content = true
 autowrap_mode = 0
 autowrap_trim_flags = 0

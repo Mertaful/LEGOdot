@@ -35,6 +35,48 @@ bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_x7abr"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k0akp"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x15ge"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 2.0
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhj6d"]
+content_margin_left = 10.0
+content_margin_top = 2.0
+content_margin_right = 10.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1p7ht"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ul2pi"]
+bg_color = Color(0.86467546, 0.86467516, 0.86467487, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7jax"]
+bg_color = Color(0.72464263, 0.72464263, 0.72464246, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8x3y4"]
+content_margin_left = 2.0
+content_margin_top = 1.0
+content_margin_right = 2.0
+content_margin_bottom = 1.0
+bg_color = Color(0.6, 0.6, 0.6, 0.40392157)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0.4745098)
+
 [resource]
 Button/colors/font_disabled_color = Color(0.34033877, 0.34033957, 0.34033898, 0.5019608)
 Button/fonts/font = ExtResource("1_sjmrw")
@@ -50,6 +92,26 @@ MainMenuButtons/styles/pressed = SubResource("StyleBoxFlat_sjmrw")
 RichTextLabel/font_sizes/normal_font_size = 32
 RichTextLabel/fonts/bold_font = SubResource("SystemFont_x7abr")
 RichTextLabel/fonts/normal_font = ExtResource("1_sjmrw")
+SubMenuMargins/base_type = &"MarginContainer"
+SubMenuMargins/constants/margin_bottom = 30
+SubMenuMargins/constants/margin_left = 30
+SubMenuMargins/constants/margin_right = 30
+SubMenuMargins/constants/margin_top = 30
+SubMenuTitle/base_type = &"RichTextLabel"
+SubMenuTitle/font_sizes/normal_font_size = 30
+TabContainer/colors/font_hovered_color = Color(1, 1, 1, 1)
+TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_unselected_color = Color(0.70380783, 0.70380783, 0.70380783, 1)
+TabContainer/constants/tab_separation = 5
+TabContainer/fonts/font = ExtResource("1_sjmrw")
+TabContainer/styles/panel = SubResource("StyleBoxFlat_k0akp")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxFlat_x15ge")
+TabContainer/styles/tab_selected = SubResource("StyleBoxFlat_vhj6d")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxFlat_x15ge")
 Title/base_type = &"RichTextLabel"
 Title/font_sizes/normal_font_size = 75
 Title/fonts/normal_font = ExtResource("1_sjmrw")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_1p7ht")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_ul2pi")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_x7jax")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_8x3y4")
