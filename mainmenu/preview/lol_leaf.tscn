@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://663npbjir377"]
 
-[ext_resource type="Texture2D" uid="uid://d7cju0iytx4m" path="res://preview/whitleaf.png" id="1_kln2y"]
+[ext_resource type="Texture2D" uid="uid://cmja4r2gyxttk" path="res://preview/Oggeticle.png" id="1_kln2y"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ndsek"]
 blend_mode = 1
@@ -24,3 +24,5 @@ angular_velocity_min = 105.0
 angular_velocity_max = 105.0
 linear_accel_min = 2.09
 linear_accel_max = 2.09
+scale_amount_min = 0.1
+scale_amount_max = 0.2

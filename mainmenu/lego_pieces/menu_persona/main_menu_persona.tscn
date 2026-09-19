@@ -12,9 +12,10 @@
 [sub_resource type="Resource" id="Resource_2sve7"]
 script = ExtResource("3_rd2kl")
 font = ExtResource("2_3kmgy")
-brightest_grey = Color(0.72464263, 0.7246426, 0.7246426, 1)
-darkest_grey = Color(0.45452422, 0.45452428, 0.45452416, 1)
-max_rotation_offset = 3.0
+brightest_grey = Color(0.8776157, 0.8776158, 0.87761563, 1)
+darkest_grey = Color(0.34781712, 0.3478169, 0.34781685, 1)
+max_rotation_offset = 18.0
+polygon_margin = 100.0
 metadata/_custom_type_script = "uid://4tvhbn1h1fa"
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k0akp"]
@@ -110,7 +111,7 @@ fit_content = true
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_n1c5g")
 position = Vector2(-6.9999695, 150.00002)
-rotation = -0.11868239
+rotation = -0.12959072
 scale = Vector2(1, 0.5)
 color = Color(0.9685872, 5.679429e-06, 7.70092e-07, 1)
 polygon = PackedVector2Array(76.01419, 211.48846, 194, 426, 731, 388)

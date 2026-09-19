@@ -7,7 +7,8 @@ var _normal_material : CanvasItemMaterial
 var default_color : Color
 var pop_tween : Tween = null
 
-signal on_button_with_polygon_hovered(button_position : Vector2, button_dimensions : Vector2, offset_rotation : float)
+signal on_button_with_polygon_hovered(id : int, button_position : Vector2, button_dimensions : Vector2, offset_rotation : float)
+signal on_button_with_polygon_lost_focus(id : int)
 
 
 func _init() -> void:
@@ -39,7 +40,10 @@ func go_normal() -> void:
 
 func _on_mouse_entered() -> void:
 	go_crazy()
-	on_button_with_polygon_hovered.emit(global_position, size, offset_transform_rotation)
+	var text_dimensions = theme.get_font("font", "Button").get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, get_theme_font_size("font_size", "Button"))
+	on_button_with_polygon_hovered.emit(get_instance_id(), Vector2(global_position.x + size.x * 0.5, global_position.y + size.y * 0.5), text_dimensions, offset_transform_rotation)
 
 func _on_mouse_exited() -> void:
 	go_normal()
+	on_button_with_polygon_lost_focus.emit(get_instance_id())
+	

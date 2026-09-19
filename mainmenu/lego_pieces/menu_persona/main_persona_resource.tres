@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_fe8cq")
+max_rotation_offset = 20.0
+polygon_margin = 90.0
 metadata/_custom_type_script = "uid://4tvhbn1h1fa"
