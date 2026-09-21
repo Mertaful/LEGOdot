@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bm0cmt1jk8lgr"]
+
+[ext_resource type="Theme" uid="uid://cerq7m6dk0m1r" path="res://lego_pieces/menu_plain/plain_theme.tres" id="1_hqks2"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=926186345]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 24.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="." unique_id=225284710]
+layout_mode = 2
+theme = ExtResource("1_hqks2")
+text = "Lorem ipsum"
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=415437933]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_hqks2")
+
+[node name="CheckBox" type="CheckBox" parent="." unique_id=337691565]
+layout_mode = 2
+theme = ExtResource("1_hqks2")
+
+[node name="HSlider" type="HSlider" parent="." unique_id=540286398]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+
+[node name="OptionButton" type="OptionButton" parent="." unique_id=46002930]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Shit"
+popup/item_0/id = 0
+popup/item_1/text = "Poop"
+popup/item_1/id = 1
+popup/item_2/text = "Ass"
+popup/item_2/id = 2
