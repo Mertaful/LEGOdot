@@ -17,6 +17,8 @@ func _input(event: InputEvent) -> void:
 		print("Debug action was just pressed.")
 
 func _ready() -> void:
+	print(Engine.is_embedded_in_editor())
+	
 	if !load_settings():
 		save_settings()
 
@@ -44,7 +46,7 @@ func _build_settings_array() -> void:
 	#Gameplay
 	var gameplay_section = SettingSection.new("Gameplay")
 	
-	gameplay_section.add_entry(SettingEntry.new("Be gay, do crime", SettingTypes.FLAG, true))
+	gameplay_section.add_entry(SettingEntry.new("Be gay, do crime", SettingTypes.FLAG, false))
 	
 	#Control
 	var control_section = SettingSection.new("Control")
@@ -59,19 +61,32 @@ func _build_settings_array() -> void:
 	#Control
 	var video_section = SettingSection.new("Video")
 	
+	var fullscreen_setting := SettingEntry.new("Fullscreen", SettingTypes.FLAG, false)
+	fullscreen_setting.callable = func(flag):
+		get_window().mode = Window.MODE_FULLSCREEN if flag else Window.MODE_WINDOWED
+	video_section.add_entry(fullscreen_setting)
+	
 	#Audio
 	var audio_section = SettingSection.new("Audio")
+	
+	var master_volume_setting := SettingEntry.new("Master Volume", SettingTypes.PERCENT, 100.0)
+	master_volume_setting.callable = func(value):
+		AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
+		print("Debug set master bus volume to %d" % value)
+	audio_section.add_entry(master_volume_setting)
 	
 	#Language
 	var language_section = SettingSection.new("Language")
 	
+	for i in range(66):
+		language_section.add_entry(SettingEntry.new("French sucks %d" % i, SettingTypes.PERCENT, randi_range(5, 100)))
 	
-	var new_section_array : Array[SettingSection]
-	new_section_array.append(gameplay_section)
-	new_section_array.append(control_section)
-	new_section_array.append(video_section)
-	new_section_array.append(audio_section)
-	new_section_array.append(language_section)
+	
+	user_settings.append(gameplay_section)
+	user_settings.append(control_section)
+	user_settings.append(video_section)
+	user_settings.append(audio_section)
+	user_settings.append(language_section)
 
 func get_settings_sections() -> Array[SettingSection]:
 	return user_settings
@@ -96,7 +111,7 @@ func get_setting(setting_name : String, setting_section : String = "") -> Settin
 		push_error("[UserSettings] Couldn't find setting with name: %s" % setting_name)
 	return result
 
-func get_setting_callables_for_section(section_name : String) -> Dictionary[String, Callable]:
+func get_setting_callables_for_section(_section_name : String) -> Dictionary[String, Callable]:
 	return {}
 
 func save_settings() -> void:
@@ -142,7 +157,7 @@ class SettingSection:
 		name = section_name
 	
 	func add_entry(new_entry : SettingEntry) -> void:
-		var insertion_index = entries.find_custom(func(entry : SettingEntry) : entry.type > new_entry.type)
+		var insertion_index = entries.find_custom(func(entry : SettingEntry) : return entry.type > new_entry.type)
 		if insertion_index == -1:
 			entries.append(new_entry)
 		else:
@@ -176,16 +191,16 @@ class SettingEntry:
 	var name : String
 	var type : SettingTypes
 	var value : Variant
-	var min : float
-	var max : float
+	var min_value : float
+	var max_value : float
 	var callable : Callable
 	
-	func _init(setting_name : String = "", setting_type : SettingTypes = SettingTypes.INVALID, default_value : Variant = null, min_value : float = -1.0, max_value : float = -1.0) -> void:
+	func _init(setting_name : String = "", setting_type : SettingTypes = SettingTypes.INVALID, default_value : Variant = null, new_min_value : float = -1.0, new_max_value : float = -1.0) -> void:
 		name = setting_name
 		type = setting_type
 		value = default_value
-		min = min_value
-		max = max_value
+		min_value = new_min_value
+		max_value = new_max_value
 		callable = func(new_value) : value = new_value
 	
 	func serialize_binary(serializer : FileAccess) -> void:
