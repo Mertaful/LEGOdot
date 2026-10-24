@@ -37,6 +37,8 @@ func _fill_tab(parent : VBoxContainer, entries : Array[UserSettings.SettingEntry
 				setting_visuals = SettingVisuals.PercentSetting.new(setting.name, user_settings_theme, setting.callable, setting.value)
 			UserSettings.SettingTypes.FLOAT:
 				setting_visuals = SettingVisuals.FloatSetting.new(setting.name, user_settings_theme, setting.callable, setting.value, setting.min_value, setting.max_value)
+			UserSettings.SettingTypes.ENUM:
+				setting_visuals = SettingVisuals.EnumSetting.new(setting.name, user_settings_theme, setting.callable, setting.value)
 		if setting_visuals:
 			parent.add_child(setting_visuals)
 	

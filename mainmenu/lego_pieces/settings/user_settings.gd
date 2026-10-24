@@ -3,10 +3,21 @@ extends Node
 
 enum SettingTypes {INVALID, FLAG, PERCENT, FLOAT, ENUM, KEYBIND}
 
+class SettingEnumEntry:
+	var name : String
+	var value : Variant
+	func _init(new_name : String, new_value : Variant) -> void:
+		name = new_name
+		value = new_value
+		
+
 const USER_SETTINGS_VERSION := 1
 var user_settings : Array[SettingSection]
 
 var input_map_overrides : Dictionary[String, Array]
+var _setting_enums : Dictionary[String, Array]
+
+signal setting_changed(setting_name : String, new_value : Variant)
 
 
 func _init() -> void:
@@ -42,51 +53,7 @@ func override_input_action(action_name : String, new_event : InputEvent) -> bool
 		InputMap.action_add_event(action_name, new_event)
 	return added_override
 
-func _build_settings_array() -> void:
-	#Gameplay
-	var gameplay_section = SettingSection.new("Gameplay")
-	
-	gameplay_section.add_entry(SettingEntry.new("Be gay, do crime", SettingTypes.FLAG, false))
-	
-	#Control
-	var control_section = SettingSection.new("Control")
-	
-	control_section.add_entry(SettingEntry.new("Mouse Sensitivity", SettingTypes.FLOAT, 3.0, 0.1, 20.0))
-	
-	var debug_bind := SettingEntry.new("Debug Action", SettingTypes.KEYBIND)
-	debug_bind.callable = func(action_name : String, new_event : InputEvent):
-		UserSettings.override_input_action(action_name, new_event)
-	control_section.add_entry(debug_bind)
-	
-	#Control
-	var video_section = SettingSection.new("Video")
-	
-	var fullscreen_setting := SettingEntry.new("Fullscreen", SettingTypes.FLAG, false)
-	fullscreen_setting.callable = func(flag):
-		get_window().mode = Window.MODE_FULLSCREEN if flag else Window.MODE_WINDOWED
-	video_section.add_entry(fullscreen_setting)
-	
-	#Audio
-	var audio_section = SettingSection.new("Audio")
-	
-	var master_volume_setting := SettingEntry.new("Master Volume", SettingTypes.PERCENT, 100.0)
-	master_volume_setting.callable = func(value):
-		AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
-		print("Debug set master bus volume to %d" % value)
-	audio_section.add_entry(master_volume_setting)
-	
-	#Language
-	var language_section = SettingSection.new("Language")
-	
-	for i in range(66):
-		language_section.add_entry(SettingEntry.new("French sucks %d" % i, SettingTypes.PERCENT, randi_range(5, 100)))
-	
-	
-	user_settings.append(gameplay_section)
-	user_settings.append(control_section)
-	user_settings.append(video_section)
-	user_settings.append(audio_section)
-	user_settings.append(language_section)
+
 
 func get_settings_sections() -> Array[SettingSection]:
 	return user_settings
@@ -111,8 +78,75 @@ func get_setting(setting_name : String, setting_section : String = "") -> Settin
 		push_error("[UserSettings] Couldn't find setting with name: %s" % setting_name)
 	return result
 
-func get_setting_callables_for_section(_section_name : String) -> Dictionary[String, Callable]:
-	return {}
+## Returns strings for enum in index order
+func get_enum_names_for_setting(setting_name : String) -> Array[SettingEnumEntry]:
+	if !_setting_enums:
+		_build_enum_dictonary()
+	if _setting_enums.has(setting_name):
+		return _setting_enums[setting_name]
+	return []
+
+
+# private
+func _build_enum_dictonary() -> void:
+	_setting_enums["Window Resolution"] = [ 
+		SettingEnumEntry.new("256x144", Vector2i(256, 144)), 
+		SettingEnumEntry.new("512x288", Vector2i(512, 288)), 
+		SettingEnumEntry.new("1024x576", Vector2i(1024, 576)), 
+		SettingEnumEntry.new("1280x720", Vector2i(1280, 720)), 
+		SettingEnumEntry.new("1920x1080", Vector2i(1920, 1080)), 
+		SettingEnumEntry.new("2560x1440", Vector2i(2560, 1440))]
+
+func _build_settings_array() -> void:
+	#Gameplay
+	var gameplay_section = SettingSection.new("Gameplay")
+	
+	gameplay_section.add_entry(SettingEntry.new("Be gay, do crime", SettingTypes.FLAG, false))
+	
+	#Control
+	var control_section = SettingSection.new("Control")
+	
+	control_section.add_entry(SettingEntry.new("Mouse Sensitivity", SettingTypes.FLOAT, 3.0, 0.1, 20.0))
+	
+	var debug_bind := SettingEntry.new("Debug Action", SettingTypes.KEYBIND)
+	debug_bind.callable = func(action_name : String, new_event : InputEvent):
+		UserSettings.override_input_action(action_name, new_event)
+	control_section.add_entry(debug_bind)
+	
+	#Control
+	var video_section = SettingSection.new("Video")
+	
+	var fullscreen_setting := SettingEntry.new("Fullscreen", SettingTypes.FLAG, false)
+	fullscreen_setting.callable = func(flag):
+		get_window().mode = Window.MODE_FULLSCREEN if flag else Window.MODE_WINDOWED
+	video_section.add_entry(fullscreen_setting)
+	
+	var resolution_setting := SettingEntry.new("Window Resolution", SettingTypes.ENUM, 2)
+	resolution_setting.callable = func(index : int):
+		get_window().size = _setting_enums["Window Resolution"][index].value
+	video_section.add_entry(resolution_setting)
+	
+	#Audio
+	var audio_section = SettingSection.new("Audio")
+	
+	var master_volume_setting := SettingEntry.new("Master Volume", SettingTypes.PERCENT, 100.0)
+	master_volume_setting.callable = func(value):
+		AudioServer.set_bus_volume_linear(AudioServer.get_bus_index("Master"), value)
+		print("Debug set master bus volume to %d" % value)
+	audio_section.add_entry(master_volume_setting)
+	
+	#Language
+	var language_section = SettingSection.new("Language")
+	
+	for i in range(66):
+		language_section.add_entry(SettingEntry.new("French sucks %d" % i, SettingTypes.PERCENT, randi_range(5, 100)))
+	
+	
+	user_settings.append(gameplay_section)
+	user_settings.append(control_section)
+	user_settings.append(video_section)
+	user_settings.append(audio_section)
+	user_settings.append(language_section)
 
 func save_settings() -> void:
 	# Vincent is afraid of bytes
@@ -190,7 +224,7 @@ class SettingSection:
 class SettingEntry:
 	var name : String
 	var type : SettingTypes
-	var value : Variant
+	var value : Variant : set = _set_value
 	var min_value : float
 	var max_value : float
 	var callable : Callable
@@ -202,6 +236,10 @@ class SettingEntry:
 		min_value = new_min_value
 		max_value = new_max_value
 		callable = func(new_value) : value = new_value
+		
+	func _set_value(new_value) -> void:
+		value = new_value
+		UserSettings.setting_changed.emit(name, value)
 	
 	func serialize_binary(serializer : FileAccess) -> void:
 		serializer.store_var(str_to_var(name))

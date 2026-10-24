@@ -22,8 +22,9 @@ UserSettings="*uid://dkix8mvlco3rw"
 
 [display]
 
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/viewport_width=1024
+window/size/viewport_height=576
+window/size/resizable=false
 
 [dotnet]
 

@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://c5wm6mi73aova"]
+
+[ext_resource type="Script" uid="uid://dykhtcubdtvm4" path="res://lego_pieces/console.gd" id="1_5m5bs"]
+[ext_resource type="Theme" uid="uid://yk7lqecc1d4p" path="res://lego_pieces/console_theme.tres" id="2_05r0g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m5bs"]
+bg_color = Color(0, 0, 0, 0.5019608)
+
+[node name="Console" type="Control" unique_id=5278695]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+script = ExtResource("1_5m5bs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=706118161]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ConsolePanel" type="PanelContainer" parent="VBoxContainer" unique_id=128346180]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_5m5bs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ConsolePanel" unique_id=1451289738]
+layout_mode = 2
+
+[node name="OutputScroll" type="ScrollContainer" parent="VBoxContainer/ConsolePanel/VBoxContainer" unique_id=1510438210]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_05r0g")
+
+[node name="OutputContainer" type="VBoxContainer" parent="VBoxContainer/ConsolePanel/VBoxContainer/OutputScroll" unique_id=761918002]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_05r0g")
+alignment = 2
+
+[node name="TextField" type="LineEdit" parent="VBoxContainer/ConsolePanel/VBoxContainer" unique_id=37370072]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_05r0g")
+placeholder_text = "..."
+keep_editing_on_text_submit = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+
+[node name="ConsolePanelSpacer" type="Control" parent="VBoxContainer" unique_id=1804015000]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="resized" from="VBoxContainer/ConsolePanel" to="." method="_on_console_panel_resized"]
+[connection signal="text_submitted" from="VBoxContainer/ConsolePanel/VBoxContainer/TextField" to="." method="_on_text_field_text_submitted"]

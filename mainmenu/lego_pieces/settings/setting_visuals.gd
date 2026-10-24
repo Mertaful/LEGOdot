@@ -31,7 +31,7 @@ func _init(display_name : String, parent_theme : Theme, callback : Callable, val
 	
 	_init_controller(value, callback, min_value, max_value)
 
-#Bools
+# Bools
 class BoolSetting extends SettingVisuals:
 	func _init_controller(value : Variant, callback : Callable, _min : float, _max : float) -> void:
 		var setting_controller := CheckButton.new()
@@ -42,7 +42,7 @@ class BoolSetting extends SettingVisuals:
 		setting_controller.toggled.connect(callback)
 		add_child(setting_controller)
 
-#Percent
+# Percent
 class PercentSetting extends SettingVisuals:
 	var slider_label : Label = null
 	func _init_controller(value : Variant, callback : Callable, _min : float, _max : float) -> void:
@@ -67,7 +67,7 @@ class PercentSetting extends SettingVisuals:
 	func _set_label_value(new_value : float) -> void:
 		slider_label.text = "%d" % int(new_value)
 
-#Float slider
+# Float slider
 class FloatSetting extends SettingVisuals:
 	var slider_label : Label = null
 	func _init_controller(value : Variant, callback : Callable, min_value : float, max_value : float) -> void:
@@ -92,3 +92,17 @@ class FloatSetting extends SettingVisuals:
 	
 	func _set_label_value(new_value : float) -> void:
 		slider_label.text = "%.1f" % new_value
+
+# Enum drop down
+class EnumSetting extends SettingVisuals:
+	func _init_controller(value : Variant, callback : Callable, _min : float, _max : float) -> void:
+		var setting_controller := OptionButton.new()
+		setting_controller.theme = theme
+		for entry in UserSettings.get_enum_names_for_setting(_display_name):
+			setting_controller.add_item(entry.name)
+		
+		setting_controller.item_selected.connect(callback)
+		setting_controller.select(value)
+		setting_controller.custom_minimum_size.x = MINIMUM_RIGHTY_SIZE
+		
+		add_child(setting_controller)
