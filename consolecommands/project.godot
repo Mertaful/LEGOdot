@@ -11,9 +11,12 @@ config_version=5
 [application]
 
 config/name="ConsoleCommands"
+config/description="Simple Lego piece for prototyping to enable user to have easy to use console commands."
+config/version="0.5"
+config/tags=PackedStringArray("developer_tools", "lego", "prototyping")
 run/main_scene="uid://c7urfixv4f2hj"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dm2gcnc070nte"
 
 [autoload]
 
@@ -36,6 +39,14 @@ folder_colors={
 
 [input]
 
+ui_text_caret_up={
+"deadzone": 0.5,
+"events": []
+}
+ui_text_caret_down={
+"deadzone": 0.5,
+"events": []
+}
 toggle_console={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":167,"location":0,"echo":false,"script":null)

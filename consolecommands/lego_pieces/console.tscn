@@ -57,10 +57,47 @@ context_menu_enabled = false
 emoji_menu_enabled = false
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
+caret_blink = true
 
 [node name="ConsolePanelSpacer" type="Control" parent="VBoxContainer" unique_id=1804015000]
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="SuggestionsRoot" type="Control" parent="." unique_id=1026831043]
+unique_name_in_owner = true
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="SuggestionsRoot" unique_id=882140997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6627451)
+
+[node name="SuggestionsScroller" type="ScrollContainer" parent="SuggestionsRoot" unique_id=460930263]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_05r0g")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 5
+
+[node name="SuggestionsContainer" type="VBoxContainer" parent="SuggestionsRoot/SuggestionsScroller" unique_id=1854739427]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("2_05r0g")
+alignment = 2
+
+[node name="Label" type="Label" parent="SuggestionsRoot/SuggestionsScroller/SuggestionsContainer" unique_id=1442600223]
+layout_mode = 2
+
 [connection signal="resized" from="VBoxContainer/ConsolePanel" to="." method="_on_console_panel_resized"]
+[connection signal="text_changed" from="VBoxContainer/ConsolePanel/VBoxContainer/TextField" to="." method="_on_text_field_text_changed"]
 [connection signal="text_submitted" from="VBoxContainer/ConsolePanel/VBoxContainer/TextField" to="." method="_on_text_field_text_submitted"]

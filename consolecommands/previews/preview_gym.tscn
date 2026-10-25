@@ -16,6 +16,7 @@ var spinning := true
 func _init() -> void:
 	Console.add_bool_command(\"bouncyboi.spin\", func(flag : bool): spinning = flag)
 	Console.add_float_command(\"bouncyboi.speed\", func(speed : float): rotation_speed = speed)
+	Console.add_float_command(\"bouncyboi.frequency\", func(frequency : float): sin_frequency = frequency)
 
 func _ready() -> void:
 	original_boi_pos = bouncy_boi.global_position

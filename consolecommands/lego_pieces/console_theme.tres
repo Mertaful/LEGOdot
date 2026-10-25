@@ -3,9 +3,12 @@
 [ext_resource type="FontFile" uid="uid://dcodk3kse8nds" path="res://lego_pieces/consolas.ttf" id="1_xq7dc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05r0g"]
+bg_color = Color(0.9607843, 0.9607843, 0.9607843, 0.43137255)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vrc4h"]
 bg_color = Color(0, 0, 0, 0.1254902)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ut8q6"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jyre"]
 bg_color = Color(0, 0, 0, 0.1254902)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xq7dc"]
@@ -15,10 +18,14 @@ bg_color = Color(0, 0, 0, 0.1254902)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [resource]
+Label/colors/font_color = Color(1, 1, 1, 0.5019608)
+Label/font_sizes/font_size = 13
+Label/fonts/font = ExtResource("1_xq7dc")
+Label/styles/focus = SubResource("StyleBoxFlat_05r0g")
 LineEdit/font_sizes/font_size = 14
 LineEdit/fonts/font = ExtResource("1_xq7dc")
-LineEdit/styles/focus = SubResource("StyleBoxFlat_05r0g")
-LineEdit/styles/normal = SubResource("StyleBoxFlat_ut8q6")
+LineEdit/styles/focus = SubResource("StyleBoxFlat_vrc4h")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_7jyre")
 RichTextLabel/colors/default_color = Color(1, 1, 1, 0.4862745)
 RichTextLabel/font_sizes/bold_font_size = 14
 RichTextLabel/font_sizes/bold_italics_font_size = 14
@@ -38,3 +45,4 @@ TextEdit/fonts/font = ExtResource("1_xq7dc")
 TextEdit/styles/focus = SubResource("StyleBoxFlat_xq7dc")
 TextEdit/styles/normal = SubResource("StyleBoxFlat_wtjw4")
 TextEdit/styles/read_only = null
+VBoxContainer/constants/separation = 3
