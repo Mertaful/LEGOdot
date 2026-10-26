@@ -24,7 +24,7 @@ extends Node
 #endregion
 
 #region Private Variables
-var _commands : Dictionary[String, Callable]
+var _commands : Dictionary[String, CommandSignal]
 var _output : Array[String]
 
 var _history : Array[String]
@@ -38,6 +38,20 @@ var _panel_tween : Tween = null
 var _shown := false
 #endregion
 
+
+#region Private Classes
+class CommandSignal:
+	func emit(arg : String) -> void:
+		for callback in callbacks:
+			callback.call(arg)
+	
+	func add_callable(new_callable : Callable) -> void:
+		callbacks.append(new_callable)
+		
+	var callbacks : Array[Callable]
+
+#endregion
+
 #region Public functions
 func print_to_console(string_to_print : String, output_prefix : String = "") -> void:
 	_output.append(string_to_print)
@@ -49,11 +63,10 @@ func print_to_console(string_to_print : String, output_prefix : String = "") -> 
 
 ## Supply callable that takes a string, and handle the string parsing yourself
 func add_custom_command(command_name : String, command_callback : Callable) -> void:
-	if _commands.has(command_name):
-		push_error("Tried adding \"%s\" command when already added to commands." % command_name)
-		return
+	if !_commands.has(command_name):
+		_commands[command_name] = CommandSignal.new()
 	
-	_commands[command_name] = command_callback
+	_commands[command_name].add_callable(command_callback)
 
 
 ## Supply callable that takes a flag to assign to your parameter
@@ -197,7 +210,7 @@ func _on_text_field_text_submitted(new_text: String) -> void:
 			var arg := ""
 			if text_values.size() > 1:
 				arg = text_values[1]
-			_commands.get(text_values[0]).call(arg)
+			_commands.get(text_values[0]).emit(arg)
 		
 		text_field.text = ""
 		_update_suggestions(text_field.text)
@@ -216,11 +229,27 @@ func _update_suggestions(text : String) -> void:
 		child.queue_free()
 	
 	var matches : Array[String]
-	for key : String in _commands.keys():
-		if key.contains(text):
-			matches.append(key)
+	
+	if !text.is_empty():
+		for key : String in _commands.keys():
+			if key.contains(text):
+				matches.append(key)
 			
-	#TODO: Implement weak matching 
+		var weak_matches : Array[String]
+		var weak_querries := text.split(" ", false)
+		for key : String in _commands.keys():
+			var was_match := true
+			for word : String in weak_querries:
+				if !key.contains(word):
+					was_match = false
+					break
+			
+			if was_match:
+				weak_matches.append(key)
+		
+		for command in weak_matches:
+			if !matches.has(command):
+				matches.append(command)
 	
 	var font := suggestions_container.theme.get_font("font", "Label")
 	var font_size := suggestions_container.get_theme_font_size("font_size", "Label")
@@ -250,7 +279,7 @@ func _update_suggestions(text : String) -> void:
 
 func _on_suggestion_gui_input(event : InputEvent)-> void:
 	if event.is_action_pressed("ui_accept"):
-		text_field.text = _focused_suggestion_text
+		text_field.text = _focused_suggestion_text + " "
 		text_field.grab_focus()
 		text_field.caret_column = text_field.text.length()
 		_update_suggestions("")
