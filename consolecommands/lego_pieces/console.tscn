@@ -6,6 +6,23 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m5bs"]
 bg_color = Color(0, 0, 0, 0.5019608)
 
+[sub_resource type="GDScript" id="GDScript_j1x3i"]
+script/source = "extends LineEdit
+
+func _ready() -> void:
+	var accept_lambda := func(_text): accept_event()
+	text_changed.connect(accept_lambda)
+	text_change_rejected.connect(accept_lambda)
+
+func _gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed(\"ui_text_caret_up\") || event.is_action_pressed(\"ui_text_caret_down\"):
+		accept_event()
+	
+
+func _unhandled_key_input(_event: InputEvent) -> void:
+	accept_event()
+"
+
 [node name="Console" type="Control" unique_id=5278695]
 layout_mode = 3
 anchors_preset = 15
@@ -58,6 +75,7 @@ emoji_menu_enabled = false
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 caret_blink = true
+script = SubResource("GDScript_j1x3i")
 
 [node name="ConsolePanelSpacer" type="Control" parent="VBoxContainer" unique_id=1804015000]
 unique_name_in_owner = true
@@ -94,9 +112,6 @@ layout_mode = 2
 size_flags_vertical = 10
 theme = ExtResource("2_05r0g")
 alignment = 2
-
-[node name="Label" type="Label" parent="SuggestionsRoot/SuggestionsScroller/SuggestionsContainer" unique_id=1442600223]
-layout_mode = 2
 
 [connection signal="resized" from="VBoxContainer/ConsolePanel" to="." method="_on_console_panel_resized"]
 [connection signal="text_changed" from="VBoxContainer/ConsolePanel/VBoxContainer/TextField" to="." method="_on_text_field_text_changed"]

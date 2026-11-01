@@ -4,6 +4,7 @@
 script/source = "extends Node3D
 
 @onready var bouncy_boi: CSGBox3D = %BouncyBoi
+@onready var camera_3d: Camera3D = $Camera3D
 
 
 var original_boi_pos : Vector3
@@ -12,6 +13,8 @@ var sin_offset := 0.0
 var sin_frequency := 4.0
 var sin_amplitude := 0.5
 var spinning := true
+
+var frame_direction : Vector2
 
 func _init() -> void:
 	Console.add_bool_command(\"bouncyboi.spin\", func(flag : bool): spinning = flag)
@@ -22,7 +25,14 @@ func _ready() -> void:
 	original_boi_pos = bouncy_boi.global_position
 	original_boi_pos.y += sin_amplitude
 
+
+func _unhandled_key_input(_event: InputEvent) -> void:
+	frame_direction = Input.get_vector(\"test_left\", \"test_right\", \"test_backward\", \"test_forward\")
+
 func _process(delta: float) -> void:
+	
+	camera_3d.global_position += Vector3(frame_direction.x, 0.0, frame_direction.y) * delta
+	
 	sin_offset = sin_offset + delta
 	if sin_offset > PI:
 		sin_offset -= PI
