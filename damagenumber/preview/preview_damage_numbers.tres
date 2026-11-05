@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DamageNumberResource" format=3 uid="uid://c4olw0odakac5"]
+
+[ext_resource type="FontFile" uid="uid://cdu5ivr57f53o" path="res://preview/InterVariable.ttf" id="1_epc3r"]
+[ext_resource type="Script" uid="uid://wgkra1ygtnfx" path="res://lego_pieces/damage_number_resource_base.gd" id="1_it1d2"]
+
+[resource]
+script = ExtResource("1_it1d2")
+font = ExtResource("1_epc3r")
+metadata/_custom_type_script = "uid://wgkra1ygtnfx"
