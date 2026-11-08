@@ -1,9 +1,20 @@
 [gd_resource type="Resource" script_class="DamageNumberResource" format=3 uid="uid://c4olw0odakac5"]
 
 [ext_resource type="FontFile" uid="uid://cdu5ivr57f53o" path="res://preview/InterVariable.ttf" id="1_epc3r"]
-[ext_resource type="Script" uid="uid://wgkra1ygtnfx" path="res://lego_pieces/damage_number_resource_base.gd" id="1_it1d2"]
+[ext_resource type="Script" uid="uid://wgkra1ygtnfx" path="res://lego_pieces/damage_number_resource.gd" id="1_it1d2"]
 
 [resource]
 script = ExtResource("1_it1d2")
+gravity = true
+min_velocity = Vector2(-3, -5)
+max_velocity = Vector2(3, -5)
+spawn_radius = 20.0
+lifetime = 2.0
 font = ExtResource("1_epc3r")
+enable_bbcode = true
+colors = Array[Color]([Color(1, 1, 1, 1), Color(0.749877, 0.34662223, 0.07594568, 1), Color(0.050980393, 0.27450982, 1, 1)])
+outline_thickness = 1
+value_scaling_enabled = true
+value_scaling_low_value = 20
+value_scaling_lowest_scale = 1.0
 metadata/_custom_type_script = "uid://wgkra1ygtnfx"

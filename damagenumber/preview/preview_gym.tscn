@@ -5,16 +5,30 @@
 [sub_resource type="GDScript" id="GDScript_xwukp"]
 script/source = "extends Node3D
 
-const PREVIEW_2D_DAMAGE_TEXT = preload(\"uid://bdkhsvqyoue5i\")
+const PREVIEW_2D_DAMAGE_TEXT = preload(\"uid://c4olw0odakac5\")
+const PREVIEW_DAMAGE_NUMBERS_3D = preload(\"uid://cj1pnowq8b5e6\")
 
 enum preview_damage_number_types {DEFAULT, CRIT, MAGIC}
 
 @onready var csg_sphere_3d: CSGSphere3D = $CSGSphere3D
 
+var sphere_offset := 0.0
+
 #func _on_d_damage_button_pressed() -> void:
 	#var test_damage_number := DamageNumber2D.new(get_viewport().get_mouse_position(), PREVIEW_2D_DAMAGE_TEXT, \"%d\" % randi_range(1, 100), preview_damage_number_types.DEFAULT)
 	#get_tree().root.add_child(test_damage_number)
 
+
+func _process(delta: float) -> void:
+	var frequency := 4.0
+	var amplitude := 1.0
+	
+	sphere_offset += delta
+	if sphere_offset > PI:
+		sphere_offset -= PI
+	
+	csg_sphere_3d.global_position.x = sin(sphere_offset * frequency) * amplitude
+	
 
 func _on_crit_pressed() -> void:
 	var test_damage_number := DamageNumber2D.new(get_viewport().get_mouse_position(), PREVIEW_2D_DAMAGE_TEXT, randi_range(1, 100), preview_damage_number_types.CRIT)
@@ -33,7 +47,8 @@ func _on_d_damage_button_gui_input(_event: InputEvent) -> void:
 
 
 func _on_d_button_pressed() -> void:
-	pass # Replace with function body.
+	var test_damage_number := DamageNumber3D.new(csg_sphere_3d.global_position, PREVIEW_DAMAGE_NUMBERS_3D, randi_range(1, 100), randi_range(0, 2))
+	get_tree().root.add_child(test_damage_number)
 "
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_l3l1w"]
@@ -103,8 +118,12 @@ size = Vector3(2.2834473, 0.03540039, 3)
 transform = Transform3D(0.6122396, 0, 0.7906723, 0, 1, 0, -0.7906723, 0, 0.6122396, 1.0069932, 0.58326995, 0.7739324)
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1787048130]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8974477, 0.3168339, -1)
+transform = Transform3D(0.3642116, 0, 0.9313162, 0, 1, 0, -0.9313162, 0, 0.3642116, -0.8974477, 0.3168339, -1)
 radius = 0.1
+
+[node name="Label3D" type="Label3D" parent="CSGSphere3D" unique_id=1057603312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+text = "TEST"
 
 [connection signal="gui_input" from="UIRoot/MarginContainer/HBoxContainer/2dDamageButton" to="." method="_on_d_damage_button_gui_input"]
 [connection signal="pressed" from="UIRoot/MarginContainer/HBoxContainer/2dDamageButton" to="." method="_on_d_damage_button_pressed"]
