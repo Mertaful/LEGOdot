@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dbtlj33rre0th"]
+
+[sub_resource type="GDScript" id="GDScript_x15ge"]
+script/source = "@tool
+extends Control
+
+signal execute
+signal cancelled
+
+@onready var _confirm: Button = %Confirm
+@onready var _cancel: Button = %Cancel
+@onready var _panel_container: PanelContainer = %PanelContainer
+@onready var check_box: CheckBox = %CheckBox
+
+@onready var shape_type_option_button: OptionButton = %ShapeTypeOptionButton
+
+
+func get_size() -> Vector2:
+	return _panel_container.size
+
+func _ready() -> void:
+	var base_control := EditorInterface.get_base_control()
+	for child in get_children(true):
+		child.theme = base_control.theme
+	
+	_panel_container.add_theme_stylebox_override(\"panel\", base_control.get_theme_stylebox(\"panel\", \"ConfirmationDialog\"))
+	
+	_confirm.pressed.connect(_confirm_pressed)
+	_cancel.pressed.connect(_cancel_pressed)
+
+
+func _confirm_pressed() -> void:
+	execute.emit(shape_type_option_button.selected, check_box.button_pressed)
+
+func _cancel_pressed() -> void:
+	cancelled.emit()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2p86"]
+content_margin_left = 9.0
+content_margin_top = 9.0
+content_margin_right = 9.0
+content_margin_bottom = 9.0
+bg_color = Color(0.14, 0.14, 0.14, 1)
+
+[node name="CollisionBatchPopup" type="Control" unique_id=2008453920]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_x15ge")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=462436772]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m2p86")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1810787770]
+clip_contents = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1650340846]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="ShapeTypeLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1566354851]
+layout_mode = 2
+text = "Collision Shape Type"
+
+[node name="ShapeTypeOptionButton" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1716173568]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Trimesh"
+popup/item_0/id = 0
+popup/item_1/text = "Single Convex"
+popup/item_1/id = 1
+popup/item_2/text = "Simplified Convex"
+popup/item_2/id = 2
+popup/item_3/text = "Multiple Convex"
+popup/item_3/id = 3
+
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2081201988]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "If checked, the batch will go through all Node3Ds with a mesh as a child. Otherwise it will only check Node3Ds at the same hierarchy as the node selected. "
+text = "Include Internal"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2090449469]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Confirm" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=230196220]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="Cancel" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=842036350]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"

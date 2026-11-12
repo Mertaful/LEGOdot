@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dcodk3kse8nds"
-path="res://.godot/imported/consolas.ttf-d9ef125701e6b3e3fb86be4a377f6d03.fontdata"
+path="res://.godot/imported/consolas.ttf-1444deaa5a058ab55db64620c401e91a.fontdata"
 
 [deps]
 
-source_file="res://lego_pieces/consolas.ttf"
-dest_files=["res://.godot/imported/consolas.ttf-d9ef125701e6b3e3fb86be4a377f6d03.fontdata"]
+source_file="res://addons/command_console/consolas.ttf"
+dest_files=["res://.godot/imported/consolas.ttf-1444deaa5a058ab55db64620c401e91a.fontdata"]
 
 [params]
 
